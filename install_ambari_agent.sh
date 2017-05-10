@@ -3,7 +3,7 @@
 setenforce 0
 
 # Download Ambari Repository
-wget -nv http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.2.0.0/ambari.repo -O /etc/yum.repos.d/ambari.repo
+wget -nv http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.5.0.3/ambari.repo -O /etc/yum.repos.d/ambari.repo
 
 # Install java-1.8
 yum -y install java-1.8.0-openjdk java-1.8.0-openjdk-devel
@@ -14,9 +14,9 @@ yum -y install ambari-agent
 # set /etc/hosts
 echo '127.0.0.1 localhost localhost.localdomain localhost4 localhost4.localdomain4' > /etc/hosts
 echo '::1 localhost localhost.localdomain localhost6 localhost6.localdomain6' >> /etc/hosts
-echo '192.168.31.207 node1.kadence.hdp' >> /etc/hosts
-echo '192.168.31.209 node2.kadence.hdp' >> /etc/hosts
-echo '192.168.31.210 node3.kadence.hdp' >> /etc/hosts
+echo '192.168.111.2 node1.kadence.hdp' >> /etc/hosts
+echo '192.168.111.3 node2.kadence.hdp' >> /etc/hosts
+echo '192.168.111.4 node3.kadence.hdp' >> /etc/hosts
 
 # replace localhost in node1
 cat /etc/ambari-agent/conf/ambari-agent.ini |sed 's/localhost/node1.kadence.hdp/g' > /etc/ambari-agent/conf/ambari-agent.ini.new
