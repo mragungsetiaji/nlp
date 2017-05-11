@@ -14,12 +14,12 @@ yum -y install ambari-agent
 # set /etc/hosts
 echo '127.0.0.1 localhost localhost.localdomain localhost4 localhost4.localdomain4' > /etc/hosts
 echo '::1 localhost localhost.localdomain localhost6 localhost6.localdomain6' >> /etc/hosts
-echo '192.168.111.2 node1.kadence.hdp' >> /etc/hosts
-echo '192.168.111.3 node2.kadence.hdp' >> /etc/hosts
-echo '192.168.111.4 node3.kadence.hdp' >> /etc/hosts
+echo '192.168.111.2 node1.example.com' >> /etc/hosts
+echo '192.168.111.3 node2.example.com' >> /etc/hosts
+echo '192.168.111.4 node3.example.com' >> /etc/hosts
 
 # replace localhost in node1
-cat /etc/ambari-agent/conf/ambari-agent.ini |sed 's/localhost/node1.kadence.hdp/g' > /etc/ambari-agent/conf/ambari-agent.ini.new
+cat /etc/ambari-agent/conf/ambari-agent.ini |sed 's/localhost/node1.example.com/g' > /etc/ambari-agent/conf/ambari-agent.ini.new
 mv -f /etc/ambari-agent/conf/ambari-agent.ini.new /etc/ambari-agent/conf/ambari-agent.ini
 
 # start ambari-agent
