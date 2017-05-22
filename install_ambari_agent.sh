@@ -18,7 +18,7 @@ echo '::1 localhost localhost.localdomain localhost6 localhost6.localdomain6' >>
 
 # replace localhost in node1
 # cat /etc/ambari-agent/conf/ambari-agent.ini |sed 's/localhost/master.kadence.local/g' > /etc/ambari-agent/conf/ambari-agent.ini.new
-mv -f /etc/ambari-agent/conf/ambari-agent.ini.new /etc/ambari-agent/conf/ambari-agent.ini
+# mv -f /etc/ambari-agent/conf/ambari-agent.ini.new /etc/ambari-agent/conf/ambari-agent.ini
 
 # start ambari-agent
 ambari-agent start
