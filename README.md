@@ -1,7 +1,57 @@
 # Natural Language Processing
 **Natural language processing** is a subfield of computer science, information engineering, and artificial intelligence concerned with the interactions between computers and human languages, in particular how to program computers to process and analyze large amounts of natural language data. 
 
-## Machine Learning Usecase
+## NLP Text Understanding (*TODO on Blog*)
+- Word Forms
+- Morphology, Diversity, Paradigms 
+- Named Entities 
+- Ambiguity																						
+- Structures and Meaning
+- Lexical Knowledge Networks Metaphors and Coreferences																				- - Phonetics and Phonolgy 
+- Lexical Analysis 
+- Semantic Analysis
+- Pragmatics
+
+## NLP Text Processing (*TODO on Blog*)
+- Tokenisation
+- Sentence Splitting																							
+- Regex Applications 
+- Word Count
+- Normalisation																						
+- Word Net																						
+- Standford Core NLP
+- NLTK																				
+- Corpora Tagging
+- N Gram Analysis																						
+- Stemming
+- Lemmatisation
+- Tree Based Corpora - Wordnet
+- Phrasing																						
+- POS Tagging 
+- Consituency Parse 
+- Dependency Parse
+- Chunking 
+- Probabilistic Parsing 
+- Ambuguity Parsing 
+- Constituency Parsing
+- HMM 
+- Viterbi
+- Forward and Backward Pass 
+- Baum Welch Algorithm
+
+## NLP Text Modelling (*TODO on Blog*)
+- N Gram models 
+- Smoothing 
+- Backoff 
+- Interpolation																											
+- TFIDF 
+- Supervised Classification																							
+- Vector Representations - Word2vec 
+- GloVe 
+- Similarity Measures in Vector Space																					
+- Latent Semantics
+
+## Machine Learning Usecase and Application
 - Automatic speech recognition (*TODO*)
 - CCG supertagging (*TODO*)
 - Common sense (*TODO*)

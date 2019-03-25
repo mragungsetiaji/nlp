@@ -9,29 +9,32 @@ for the n-gram,you can use data_util to generate. see method process_one_sentenc
 import tensorflow as tf
 import numpy as np
 from p6_fastTextB_model_multilabel import fastTextB as fastText
-#from p4_zhihu_load_data import load_data_with_multilabels,create_voabulary,create_voabulary_label
-#from tflearn.data_utils import to_categorical, pad_sequences
+from load_data import load_data_with_multilabels,create_voabulary,create_voabulary_label
+from tflearn.data_utils import to_categorical, pad_sequences
 import os
 import word2vec
 import pickle
 import h5py
+
 #configuration
 FLAGS=tf.app.flags.FLAGS
+
 #tf.app.flags.DEFINE_integer("label_size",1999,"number of label")
 tf.app.flags.DEFINE_string("cache_file_h5py","../data/ieee_zhihu_cup/data.h5","path of training/validation/test data.") #../data/sample_multiple_label.txt
 tf.app.flags.DEFINE_string("cache_file_pickle","../data/ieee_zhihu_cup/vocab_label.pik","path of vocabulary and label files") #../data/sample_multiple_label.txt
 
 tf.app.flags.DEFINE_float("learning_rate",0.001,"learning rate")
-tf.app.flags.DEFINE_integer("batch_size", 128, "Batch size for training/evaluating.") #512批处理的大小 32-->128
-tf.app.flags.DEFINE_integer("decay_steps", 20000, "how many steps before decay learning rate.") #批处理的大小 32-->128
-tf.app.flags.DEFINE_float("decay_rate", 0.9, "Rate of decay for learning rate.") #0.5一次衰减多少
+tf.app.flags.DEFINE_integer("batch_size", 128, "Batch size for training/evaluating.") 
+tf.app.flags.DEFINE_integer("decay_steps", 20000, "how many steps before decay learning rate.") 
+tf.app.flags.DEFINE_float("decay_rate", 0.9, "Rate of decay for learning rate.") 
 tf.app.flags.DEFINE_integer("num_sampled",10,"number of noise sampling") #100
 tf.app.flags.DEFINE_string("ckpt_dir","fast_text_checkpoint_multi/","checkpoint location for the model")
 tf.app.flags.DEFINE_integer("sentence_len",200,"max sentence length")
 tf.app.flags.DEFINE_integer("embed_size",128,"embedding size") #100
 tf.app.flags.DEFINE_boolean("is_training",True,"is traning.true:tranining,false:testing/inference")
 tf.app.flags.DEFINE_integer("num_epochs",25,"embedding size")
-tf.app.flags.DEFINE_integer("validate_every", 1, "Validate every validate_every epochs.") #每10轮做一次验证
+tf.app.flags.DEFINE_integer("validate_every", 1, "Validate every validate_every epochs.") 
+
 #tf.app.flags.DEFINE_string("training_path", '/home/xul/xul/9_fastTextB/training-data/test-zhihu6-only-title-multilabel-trigram.txt', "location of traning data.") #每10轮做一次验证
 tf.app.flags.DEFINE_boolean("use_embedding",False,"whether to use embedding or not.")
 
@@ -116,11 +119,10 @@ def main(_):
                 save_path=FLAGS.ckpt_dir+"model.ckpt"
                 saver.save(sess,save_path,global_step=epoch) #fast_text.epoch_step
 
-        # 5.最后在测试集上做测试，并报告测试准确率 Test
+        # 5. Test
         test_loss, test_acc = do_eval(sess, fast_text, testX, testY,batch_size,index2label) #testY1999
     pass
 
-# 在验证集上做验证，报告损失、精确度
 def do_eval(sess,fast_text,evalX,evalY,batch_size,vocabulary_index2word_label): #evalY1999
     evalX=evalX[0:3000]
     evalY=evalY[0:3000]
@@ -172,7 +174,7 @@ def assign_pretrained_word_embedding(sess,vocabulary_index2word,vocab_size,fast_
     print("word. exists embedding:", count_exist, " ;word not exist embedding:", count_not_exist)
     print("using pre-trained word emebedding.ended...")
 
-#从logits中取出前五 get label using logits
+# get label using logits
 def get_label_using_logits(logits,vocabulary_index2word_label,top_number=5):
     index_list=np.argsort(logits)[-top_number:]
     index_list=index_list[::-1]
@@ -182,7 +184,6 @@ def get_label_using_logits(logits,vocabulary_index2word_label,top_number=5):
     #    label_list.append(label) #('get_label_using_logits.label_list:', [u'-3423450385060590478', u'2838091149470021485', u'-3174907002942471215', u'-1812694399780494968', u'6815248286057533876'])
     return index_list
 
-#统计预测的准确率
 def calculate_accuracy(labels_predicted, labels,eval_counter):
     if eval_counter<10:
         print("labels_predicted:",labels_predicted," ;labels:",labels)
